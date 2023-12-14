@@ -1,6 +1,7 @@
 package fr.vde.springbootsecurityjwtauth.config;
 
 import fr.vde.springbootsecurityjwtauth.securityJWT.AuthEntryPointJwt;
+import fr.vde.springbootsecurityjwtauth.securityJWT.AuthTokenFilter;
 import fr.vde.springbootsecurityjwtauth.services.servicesImpl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

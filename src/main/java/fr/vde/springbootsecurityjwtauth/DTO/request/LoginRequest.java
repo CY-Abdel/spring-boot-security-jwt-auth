@@ -1,18 +1,28 @@
 package fr.vde.springbootsecurityjwtauth.DTO.request;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginRequest {
 
-  private Object message = "connexion reussi";
+  @NotBlank
+  private String username;
 
-  public LoginRequest(Object message) {
-    this.message = message;
+  @NotBlank
+  private String password;
+
+  public String getUsername() {
+    return username;
   }
 
-  public Object getMessage() {
-    return message;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
-  public void setMessage(Object message) {
-    this.message = message;
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 }

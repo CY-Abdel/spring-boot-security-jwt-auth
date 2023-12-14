@@ -1,6 +1,5 @@
-package fr.vde.springbootsecurityjwtauth.config;
+package fr.vde.springbootsecurityjwtauth.securityJWT;
 
-import fr.vde.springbootsecurityjwtauth.securityJWT.JwtUtils;
 import fr.vde.springbootsecurityjwtauth.services.servicesImpl.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
