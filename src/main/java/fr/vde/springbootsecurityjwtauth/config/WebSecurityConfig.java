@@ -27,6 +27,11 @@ public class WebSecurityConfig {
   private AuthEntryPointJwt unauthorizedHandler;
 
   @Bean
+  public AuthTokenFilter authenticationJwtTokenFilter() {
+    return new AuthTokenFilter();
+  }
+
+  @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
       .csrf(csrf -> csrf.disable())
@@ -43,9 +48,9 @@ public class WebSecurityConfig {
         .anyRequest().authenticated()
       );
 
-//    http.authenticationProvider(authenticationProvider());
+    http.authenticationProvider(authenticationProvider());
 
-//    http.addFilterBefore(jwtfilteeeeeeeeeee(), UsernamePasswordAuthenticationFilter.class);
+    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
   }
