@@ -94,7 +94,7 @@ public class AuthServiceImpl implements AuthService {
     Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
 
-    if (strRoles == null) {
+    if ( strRoles == null ) {
       Role userRole = roleRepository.findByName(ERole.ROLE_USER)
         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 
@@ -124,7 +124,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     user.setRoles(roles);
-    userRepository.save(user);
+    User userToSave = user;
+    userRepository.save(userToSave);
 
     return ResponseEntity.ok(
       new MessageResponse("User created successfully!")

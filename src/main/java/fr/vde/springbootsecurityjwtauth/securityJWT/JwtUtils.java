@@ -20,13 +20,13 @@ public class JwtUtils {
   private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
   // value in application.propreties
-  @Value("${juba.app.jwtSecret}")
-  private String jwtSecret;
+//  @Value("${juba.app.jwtSecret}")
+  private String jwtSecret = "FXWujoTLgigoQpFuUWbmUWDhiabRHjcfggQIrEVwJxIhPOwDEoUZDXZSzhgOkzSh";
 
   // value in application.propreties
-  // we can also do -> @Value("${bezkoder.app.jwtExpirationMs}")
-  @Value("$juba.app.jwtExpirationMs")
-  private int jwtExpirationMs;
+  // we can also do -> @Value("86400000")
+//  @Value("86400000")
+  private int jwtExpirationMs = 86400000;
 
   public String generateJwtToken(Authentication authentication) {
     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
@@ -36,7 +36,7 @@ public class JwtUtils {
       .setIssuedAt(new Date())
       .setExpiration(new Date(
         (new Date()).getTime() + jwtExpirationMs))
-      .signWith(key(), SignatureAlgorithm.ES256)
+      .signWith(key(), SignatureAlgorithm.HS256)
       .compact();
   }
 
@@ -69,7 +69,6 @@ public class JwtUtils {
     } catch (IllegalArgumentException e) {
       logger.error("JWT claims string is empty: {}", e.getMessage());
     }
-
     return false;
   }
 

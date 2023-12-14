@@ -9,21 +9,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:5173", maxAge = 3600)
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("auth")
 public class AuthController {
 
   @Autowired
   AuthService authService;
 
-  @PostMapping("/signin") // se connecter
+  @PostMapping("signin") // se connecter
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
     return authService.authenticateUser(loginRequest);
   }
 
-  @PostMapping("/signup") // se connecter
+  @PostMapping("signup") // se connecter
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
-    return authService.registerUser(signupRequest);
+//    return authService.registerUser(signupRequest);
+    return ResponseEntity.ok(authService.registerUser(signupRequest));
   }
 }

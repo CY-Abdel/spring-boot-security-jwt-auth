@@ -8,7 +8,9 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@SpringBootApplication (exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication
+//@SpringBootApplication (exclude = SecurityAutoConfiguration.class)
+//public class SpringBootSecurityJwtAuthApplication {
 public class SpringBootSecurityJwtAuthApplication implements CommandLineRunner {
 
   public static void main(String[] args) {
@@ -30,9 +32,10 @@ public class SpringBootSecurityJwtAuthApplication implements CommandLineRunner {
       jdbcTemplate.execute("INSERT INTO roles(name) VALUES('ROLE_MODERATOR')");
       jdbcTemplate.execute("INSERT INTO roles(name) VALUES('ROLE_ADMIN')");
     }
-    // Vérifier si l'administrateur existe avant d'insérer
+
+//     Vérifier si l'administrateur existe avant d'insérer
     if (!userExists("admin")) {
-      insertUser("admin", "admin@vde.com", passwordEncoder.encode("admin"), "ROLE_ADMIN");
+      insertUser("admin", "admin@vde.com", passwordEncoder.encode("admin12345"), "ROLE_ADMIN");
     }
 
     // Vérifier si le modérateur existe avant d'insérer
@@ -53,5 +56,6 @@ public class SpringBootSecurityJwtAuthApplication implements CommandLineRunner {
     Integer roleId = jdbcTemplate.queryForObject("SELECT id FROM roles WHERE name = ?", Integer.class, role);
 
     jdbcTemplate.update("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)", userId, roleId);
+
   }
 }
