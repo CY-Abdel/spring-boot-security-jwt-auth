@@ -20,13 +20,14 @@ public class JwtUtils {
   private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
   // value in application.propreties
-//  @Value("${juba.app.jwtSecret}")
-  private String jwtSecret = "FXWujoTLgigoQpFuUWbmUWDhiabRHjcfggQIrEVwJxIhPOwDEoUZDXZSzhgOkzSh";
+  @Value("${juba.app.jwtSecret}")
+  //  private String jwtSecret = "FXWujoTLgigoQpFuUWbmUWDhiabRHjcfggQIrEVwJxIhPOwDEoUZDXZSzhgOkzSh";
+  private String jwtSecret;
 
   // value in application.propreties
   // we can also do -> @Value("86400000")
-//  @Value("86400000")
-  private int jwtExpirationMs = 86400000;
+  @Value("${juba.app.jwtExpirationMs}")
+  private int jwtExpirationMs;
 
   public String generateJwtToken(Authentication authentication) {
     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();

@@ -1,5 +1,7 @@
 package fr.vde.springbootsecurityjwtauth.config;
 
+import fr.vde.springbootsecurityjwtauth.models.ERole;
+import fr.vde.springbootsecurityjwtauth.models.Role;
 import fr.vde.springbootsecurityjwtauth.securityJWT.AuthEntryPointJwt;
 import fr.vde.springbootsecurityjwtauth.securityJWT.AuthTokenFilter;
 import fr.vde.springbootsecurityjwtauth.services.servicesImpl.UserDetailsServiceImpl;
@@ -41,10 +43,12 @@ public class WebSecurityConfig {
       .authorizeHttpRequests(auth -> auth
         .requestMatchers("/auth/**").permitAll()
         .requestMatchers("/test/all").permitAll()
+        .requestMatchers("/test/admin").hasAnyAuthority(ERole.ROLE_ADMIN.name())
+        .requestMatchers("/test/mod").hasAnyAuthority(ERole.ROLE_ADMIN.name(), ERole.ROLE_MODERATOR.name())
         .anyRequest().authenticated()
       )
-//      .exceptionHandling(exception -> exception
-//        .authenticationEntryPoint(unauthorizedHandler))
+      .exceptionHandling(exception -> exception
+        .authenticationEntryPoint(unauthorizedHandler))
 
       .sessionManagement(session -> session
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
